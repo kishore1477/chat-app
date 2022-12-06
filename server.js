@@ -18,7 +18,7 @@ io.on("connection", socket=>{
     // https://socket.io/docs/v4/server-socket-instance/
     socket.on('new-user-joined', name=>{
       
-        console.log("new user", name)
+        
         // insert name of user in users object by using socket id
         users[socket.id] = name
         // send message to all user 
@@ -27,7 +27,7 @@ io.on("connection", socket=>{
     })
     // send message to all the connected users
     socket.on('send', message=>{
-        console.log("message is", message)
+        
          io.emit('receive', {message:message, name: users[socket.id]})
     })
     socket.on('disconnect', message=>{
@@ -37,7 +37,7 @@ io.on("connection", socket=>{
 
 })
 server.listen(5000, () => {
-  console.log('listening on *:5000');
+  
 });
 
 

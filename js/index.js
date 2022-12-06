@@ -1,7 +1,7 @@
 var socket = io();
  var name1 = prompt("Enter your name.")
 if(name1){
-    console.log("name is ", name1)
+    
 
 //  send message to the server
     var form = document.getElementById('send-msg');
@@ -40,7 +40,7 @@ if(name1){
      // recieve message from the server to the all connected user
 
     socket.on('receive', data =>{
-        console.log("data is", data)
+        
         if(data.name!=name1){
           append(`<b>${data.name}</b>:${data.message}`, 'left')
 
