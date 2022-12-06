@@ -17,17 +17,22 @@ const users= {}
 io.on("connection", socket=>{
     // https://socket.io/docs/v4/server-socket-instance/
     socket.on('new-user-joined', name=>{
+      
         console.log("new user", name)
         // insert name of user in users object by using socket id
         users[socket.id] = name
         // send message to all user 
-        socket.broadcast.emit('user-joined', name)
+        io.emit('user-joined', name)
 
     })
     // send message to all the connected users
     socket.on('send', message=>{
         console.log("message is", message)
-        socket.emit('receive', {message:message, name: users[socket.id]})
+         io.emit('receive', {message:message, name: users[socket.id]})
+    })
+    socket.on('disconnect', message=>{
+         io.emit('left',  users[socket.id])
+         delete users[socket.id]
     })
 
 })
